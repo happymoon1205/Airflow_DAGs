@@ -12,18 +12,18 @@ from bson import json_util
 import logging
 
 default_args = {
-    'owner': 'airflow',
-    'depends_on_past': False,
-    'start_date': datetime(2023, 8, 23),
-    'retries': 1,
-    'retry_delay': timedelta(minutes=5),
+    'owner': 'airflow',                  # DAG의 소유자
+    'depends_on_past': False,            # 이전 실행이 성공하든 실패하든 실행(이전 실행에 대한 의존여부 지정)
+    'start_date': datetime(2023, 8, 1),  # 시작날짜
+    'retries': 1,                        # 실패시 재시도 횟수
+    'retry_delay': timedelta(minutes=5), # 실패시 다음시도까지 대기 시간
 }
 
 dag = DAG(
-    'cgv_movie_scraper2',
-    default_args=default_args,
-    description='Scrape CGV movie data2',
-    schedule_interval='0 9 * * *',  # 9:00 AM daily
+    'cgv_movie_scraper',                 # DAG의 이름
+    default_args=default_args,           
+    description='Scrape CGV movie data', # DAG설명
+    schedule_interval='0 1 * * *',       # 시작 시간
 )
 
 def scrape_cgv_movies():

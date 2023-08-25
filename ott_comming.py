@@ -13,18 +13,18 @@ from io import BytesIO
 
 
 default_args = {
-    'owner': 'airflow',
-    'depends_on_past': False,
-    'start_date': datetime(2023, 7, 31, 9, 0, 0),  # Start date and time for the DAG
-    'retries': 1,
-    'retry_delay': timedelta(minutes=5),
+    'owner': 'airflow',                  # DAG의 소유자
+    'depends_on_past': False,            # 이전 실행이 성공하든 실패하든 실행(이전 실행에 대한 의존여부 지정)
+    'start_date': datetime(2023, 8, 1),  # 시작날짜
+    'retries': 1,                        # 실패시 재시도 횟수
+    'retry_delay': timedelta(minutes=5), # 실패시 다음시도까지 대기 시간
 }
 
 dag = DAG(
-    'ott_comming_update',
+    'ott_comming_update',                # DAG이름
     default_args=default_args,
-    description='Update movies data daily at 9 AM',
-    schedule_interval=timedelta(days=1),  # Schedule interval for daily execution
+    description='Scrape OTT movie data', # DAG설명
+    schedule_interval='30 1 * * *',      # 시작시간
 )
 
 

@@ -13,19 +13,18 @@ import logging
 
 
 default_args = {
-    'owner': 'airflow',
-    'depends_on_past': False,
-    'start_date': datetime(2023, 8, 23),
-    'retries': 1,
-    'retry_delay': timedelta(minutes=5),
+    'owner': 'airflow',                  # DAG의 소유자
+    'depends_on_past': False,            # 이전 실행이 성공하든 실패하든 실행(이전 실행에 대한 의존여부 지정)
+    'start_date': datetime(2023, 8, 1),  # 시작날짜
+    'retries': 1,                        # 실패시 재시도 횟수
+    'retry_delay': timedelta(minutes=5), # 실패시 다음시도까지 대기 시간
 }
 
 dag= DAG(
-    'lotte_movie_scraper2',
+    'lotte_movie_scraper',                 # DAG이름
     default_args=default_args,
-    description='Scrape Lotte movie data2',
-    schedule_interval='0 8 * * *', 
-    catchup=False,
+    description='Scrape Lotte movie data', # DAG설명
+    schedule_interval='15 1 * * *',        # 시작시간
 ) 
 
 def scrape_lotte_movies():
